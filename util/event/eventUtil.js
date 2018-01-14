@@ -7,11 +7,11 @@ var EventUtil = {
    * handler: cb
    */
   addHandler: function (element, type, handler) {
-    if (element.addEventListener) {
+    if (element.addEventListener) { //DOM2级事件处理程序
       element.addEventListener(type, handler, false);
-    } else if (element.attachEvent) {
+    } else if (element.attachEvent) { //IE
       element.attachEvent("on" + type, handler);
-    } else {
+    } else { //DOM0级事件处理程序
       element["on" + type] = handler;
     }
   },
