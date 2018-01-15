@@ -5,3 +5,5 @@ TODOs.md
 *.log
 test/unit/coverage
 test/e2e/reports
+
+http://192.168.1.150:8881/#/home
