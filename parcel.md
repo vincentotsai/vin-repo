@@ -21,4 +21,4 @@
 
 ## 结果
 
-git地址：
+git地址：https://github.com/vincentotsai/vin-parcel.git
