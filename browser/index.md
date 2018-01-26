@@ -1,4 +1,4 @@
-浏览器的渲染进程是多线程的:
+## 浏览器的渲染进程是多线程的:
 
 GUI渲染线程
 
@@ -31,3 +31,27 @@ JS引擎一直等待着任务队列中任务的到来，然后加以处理，浏
 
 在XMLHttpRequest在连接后是通过浏览器新开一个线程请求
 将检测到状态变更时，如果设置有回调函数，异步线程就产生状态变更事件，将这个回调再放入事件队列中。再由JavaScript引擎执行。
+
+## Chrome DevTools
+
+### network
+
+Queueing：浏览器会在以下情况对请求进行排队：
+
+有更高优先级的请求
+
+在这个域下，已经有6个TCP连接了，达到Chrome最大限制数量。此条规则仅适用在HTTP/1.0和HTTP/1.1
+
+Stalled：Queueing中的任何一个因素发生都会导致该请求被拖延
+
+Proxy negotiation：浏览器与代理服务器协商消耗的时间
+
+DNS Lookup：浏览器对请求的IP地址进行DNS查找所消耗的时间
+
+Initial conncection：发起连接所消耗的时间
+
+Request sent：请求发送消耗的时间
+
+Waiting (TTFB)：浏览器等待响应的时间，TTFB表示 Time To First Byte
+
+Content Download：资源下载所消耗的时间

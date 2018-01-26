@@ -4,3 +4,9 @@ https://segmentfault.com/a/1190000012925872#articleHeader7
 Worker 详解
 了解service workers
 了解PWA: Progressive Web Apps
+
+https://segmentfault.com/a/1190000008407729
+https://segmentfault.com/a/1190000012925872#articleHeader7
+https://segmentfault.com/a/1190000008608538
+
+https://developers.google.com/web/tools/chrome-devtools/network-performance/reference#timing-explanation
