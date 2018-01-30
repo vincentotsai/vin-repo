@@ -55,3 +55,7 @@ Request sent：请求发送消耗的时间
 Waiting (TTFB)：浏览器等待响应的时间，TTFB表示 Time To First Byte
 
 Content Download：资源下载所消耗的时间
+
+### timeline
+
+Timeline，顾名思义“时间轴”，不论是页面加载还是在页面上产生交互，它都能记录下来这一段时间内浏览器干了什么，执行了哪些操作，消耗了多少时间等等。由此可见，Timeline对于分析网站性能是多么重要。

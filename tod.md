@@ -10,6 +10,9 @@ https://segmentfault.com/a/1190000008407729
 https://segmentfault.com/a/1190000012925872#articleHeader7
 https://segmentfault.com/a/1190000008608538
 
+网站性能优化—CRP
+https://segmentfault.com/a/1190000008550336
+
 https://developers.google.com/web/tools/chrome-devtools/network-performance/reference#timing-explanation
 
 年前分享
