@@ -1,3 +1,4 @@
+## define keepAlive
 ```javaScript
 routes: [{
         path: '/',
@@ -37,7 +38,7 @@ routes: [{
 ```
 
 
-钩子函数的执行顺序
+## 钩子函数的执行顺序
 
 不使用keep-alive
 beforeRouteEnter --> created --> mounted --> destroyed
@@ -45,3 +46,26 @@ beforeRouteEnter --> created --> mounted --> destroyed
 使用keep-alive
 首次进入：beforeRouteEnter --> created --> mounted --> activated --> deactivated
 再次进入缓存的页面，只会触发beforeRouteEnter -->activated --> deactivated ，created和mounted不会再执行。我们可以利用不同的钩子函数，做不同的事。
+
+
+## 在router/index.js的meta中添加isBack变量，默认false
+```javaScript
+{
+          path: '/page1',
+          name: 'page1',
+          component: page1,
+          meta: {
+              keepAlive: true, //此组件需要被缓存
+              isBack:false, //用于判断上一个页面是哪个
+          }
+      },
+      {
+          path: '/page2',
+          name: 'page2',
+          component: page2,
+          meta: {
+              keepAlive: true, // 此组件需要被缓存
+              isBack:false, //用于判断上一个页面是哪个
+          }
+      },
+```
