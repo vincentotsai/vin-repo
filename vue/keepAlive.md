@@ -1,3 +1,4 @@
+# route方案
 ## define keepAlive
 ```javaScript
 routes: [{
@@ -69,3 +70,5 @@ beforeRouteEnter --> created --> mounted --> destroyed
           }
       },
 ```
+
+# keepalive 动态设置include方案
