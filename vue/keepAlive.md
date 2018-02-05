@@ -72,3 +72,22 @@ beforeRouteEnter --> created --> mounted --> destroyed
 ```
 
 # keepalive 动态设置include方案
+
+
+# 终结方案
+1. 在路由处将需要keepalive的组件都打上meta.keepAlive=true.
+2. 在app.vue处设置如下：
+```html
+<keep-alive :max="5">
+    <router-view v-if="$route.meta.keepAlive" :key="key" class="view-content"></router-view>
+</keep-alive>
+<router-view v-if="!$route.meta.keepAlive" :key="key" class="view-content"></router-view>
+```
+```javaScript
+computed: {
+    key() {
+      return this.$route.fullPath
+    }
+}
+```
+3. ok.
