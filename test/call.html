@@ -1,0 +1,13 @@
+<ul>
+  <li>one</li>
+  <li>222</li>
+  <li>3</li>
+</ul>
+<script>
+  var list = document.querySelectorAll('li')
+  for (let i = 0; i < list.length; i++) {
+    (function () {
+      console.log(this.innerHTML)
+    }).call(list[i])
+  }
+</script>

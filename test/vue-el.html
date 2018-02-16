@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>v</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="./vue.js"></script>
+  <!-- <link href="css/style.css" rel="stylesheet"> -->
+</head>
+
+<body>
+  <div class="demo">
+    cat.say:
+    <input type="text" v-model="cat.say">{{ cat.say }}
+    <br> reversed CAT say: {{ reverseMsg()}}
+    <br> bar
+    <input type="text" v-model="model.bar">{{model.bar}}
+    <br> foo
+    <input type="text" v-model="model.foo">{{model.foo}}
+    <br> li'sound
+    <input type="text" v-model="li.sound">{{li.sound}}
+    <br> li'hair
+    <input type="text" v-model="li.hair">{{li.hair}}
+    <br>
+    <hr>
+    <div @click="doDiv">
+      <button @click.stop="doBtn">click!</button>
+    </div>
+    <hr>
+    <input type="radio" id="first" value="first" v-model="picked">
+    <label for="first">one</label>
+    <br>
+    <input type="radio" id="second" value="second" v-model="picked">
+    <label for="second">two</label>
+    <p>双向数据绑定：{{picked}}</p>
+    <hr>
+    <input id="s" type="checkbox" v-model="toggle" v-bind:true-value="a" v-bind:false-value="b">
+    <label for="s">选择</label>
+    <p>{{toggle}}</p>
+    <hr>
+    <p v-for="(value,key,index) in objects">
+      {{value + "-" + key + "-" + index}}
+    </p>
+    <hr>
+    <ol>
+      <!-- Create an instance of the todo-item component -->
+      <!-- <todo-item></todo-item> -->
+    </ol>
+  </div>
+</body>
+<script defer>
+  console.log('Vue->>', Vue)
+  let cat = {
+    say: 'meow~~'
+  }
+  class Li {
+    constructor() {
+      this.hair = 'long black'
+      this._sound = null
+    }
+    get sound() {
+      return this._sound
+    }
+    set sound(newVal) {
+      this._sound = newVal
+    }
+  }
+  class Model {
+    constructor() {
+      this.foo = '123'
+      this._bar = null
+    }
+    get bar() {
+      console.log('get bar init...')
+      return this._bar
+
+    }
+    set bar(newvalue) {
+      console.log('set bar init...')
+      this._bar = newvalue
+    }
+  }
+
+  var app = new Vue({
+    el: '.demo',
+    data: {
+      cat: cat,
+      li: new Li(),
+      model: new Model(),
+      objects: {
+        1: "one",
+        2: "two",
+        3: "three"
+      },
+      picked: null,
+      toggle: "",
+      a: "select",
+      b: "notSelect"
+    },
+    methods: {
+      reverseMsg() {
+        return this.cat.say.split('').reverse().join('')
+      },
+      doDiv() {
+        console.log('do div')
+      },
+      doBtn() {
+        console.log('do btn')
+      }
+    },
+    computed: {
+      reversedCat() {
+        return this.cat.say.split('').reverse().join('')
+      }
+    },
+    watch: {
+      'cat.say' () {
+        console.log('cat.say改变了。')
+      }
+    }
+  })
+  console.log(app.reversedCat)
+
+  Vue.component('todo-item', {
+    template: '<li>This is a todo</li>'
+  })
+</script>
+
+</html>

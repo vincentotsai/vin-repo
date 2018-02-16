@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+
+</head>
+
+<body onload="init();">
+  <div id="target1"> Touch me ... </div>
+  <div id="target2" ontouchmove="moveTouch(event)"> And Touch me ... </div>
+  <script>
+    function moveTouch(ev) {
+      // Process the event
+      alert(123)
+    }
+    function init() {
+      var el = document.getElementById("target1")
+      console.log('init..')
+      el.ontouchmove = moveTouch
+      console.log(el.ontouchmove)
+    }
+  </script>
+</body>
+
+</html>
