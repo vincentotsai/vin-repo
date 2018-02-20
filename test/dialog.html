@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>html5 dialog元素</title>
+</head>
+<body>
+  <h2>hello world</h2>
+  <dialog>this is a native dialog</dialog>
+  <script>
+    const modal = document.querySelector('dialog')
+    modal.showModal()
+    modal.onclick = function () {
+      modal.close()
+    }
+  </script>
+</body>
+</html>

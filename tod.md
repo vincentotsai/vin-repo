@@ -24,4 +24,6 @@ USB Debugging
 blog of me .
 collection **xmind** of what i had gained.
 swimming certificated
+violin
 cooking by myself
+webAssembly将其他编程语言转成JS的技术
