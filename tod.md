@@ -27,3 +27,6 @@ swimming certificated
 violin
 cooking by myself
 webAssembly将其他编程语言转成JS的技术
+
+web性能测试：
+http://yellowlab.tools/result/eykn06s9y6/rule/imageOptimization
