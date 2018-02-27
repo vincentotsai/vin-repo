@@ -1,4 +1,5 @@
-## vscode顺手插件
+## vscode 必备插件
+
 * javascript console utils
 * background
 * Dracula Official
