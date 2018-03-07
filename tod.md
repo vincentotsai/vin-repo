@@ -23,3 +23,6 @@ collection **xmind** of what i had gained.
 swimming certificated
 violin
 webAssembly将其他编程语言转成JS的技术
+
+0307
+保持tabs吸顶，只需在请求接口后对数据做处理.
