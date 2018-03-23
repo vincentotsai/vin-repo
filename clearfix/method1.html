@@ -1,0 +1,62 @@
+<!-- 使用 :after 伪元素 -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .outer {
+            border: 1px solid black;
+            width: 300px;
+        }
+
+        .inner {
+            width: 50px;
+            height: 50px;
+            background-color: #ff4400;
+            margin-right: 20px;
+            float: left;
+        }
+
+        .footer {
+            background-color: #005FC3;
+            width: 200px;
+            height: 100px;
+        }
+
+        .clearfix:after {
+            /*最简方式*/
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+        /* 新浪使用方式
+        .clearfix:after{ 
+            content: '';
+            display: block;
+            clear: both;
+            height: 0;
+            visibility: hidden;
+        }
+        */
+
+        .clearfix {
+            /*兼容 IE*/
+            zoom: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="outer clearfix">
+        <div class="inner"></div>
+        <div class="inner"></div>
+        <div class="inner"></div>
+    </div>
+    <div class="footer"></div>
+</body>
+
+</html>

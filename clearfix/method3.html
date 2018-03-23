@@ -1,0 +1,37 @@
+<!-- 3. 利用 overflow:hidden 属性 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .outer{
+            border: 1px solid black;
+            width: 300px;
+            overflow: hidden;
+            zoom: 1;/*兼容 IE*/
+        }
+        .inner{
+            width: 50px;
+            height: 50px;
+            background-color: #ff4400;
+            margin-right: 20px;
+            float: left;
+        }
+        .footer{
+            background-color: #005FC3;
+            width: 200px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="outer">
+        <div class="inner"></div>
+        <div class="inner"></div>
+        <div class="inner"></div>
+    </div>
+    <div class="footer"></div>
+</body>
+</html>
