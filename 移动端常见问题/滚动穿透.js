@@ -1,4 +1,4 @@
-// 滚动穿透终极解决方案
+// 滚动穿透终极解决方案（用时需调整）
 var ModalHelper = (function(bodyCls) {
   var scrollTop // 在闭包中定义一个用来保存滚动位置的变量
   return {
