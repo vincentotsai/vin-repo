@@ -1,0 +1,12 @@
+.upload_item {
+  width: 150px;
+  height: 150px;
+  float: left;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+
+.upload_item > img {
+  width: 100%;
+  height: 100%;
+}

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link href="upload.css" rel="stylesheet" type="text/css" />
+	<title>Document</title>
+	<style>
+		body,
+		html {
+			background-color: #473a3a;
+		}
+
+		#uploads {
+			width: 150px;
+			height: 150px;
+			background-color: #fff;
+			margin: 50px;
+			position: relative;
+		}
+
+		#uploads input {
+			position: absolute;
+			top: 0px;
+			bottom: 0px;
+			left: 0px;
+			right: 0px;
+			width: 100%;
+			height: 100%;
+			opacity: 0;
+			cursor: pointer;
+
+		}
+
+		#files {
+			width: auto;
+			height: 150px;
+		}
+	</style>
+</head>
+
+<body>
+
+
+	<div id='uploads'>
+		<input id='fileupload' type='file' />
+	</div>
+
+	<div id='files'>
+
+	</div>
+
+	<script src='./upload.js'></script>
+	<script>
+		new Upload({
+			input: '#fileupload', //input元素的id
+			imgs: '#files', //图片预览数组的展示区id
+			maxnum: 2, //上传图片的最大数量
+			isreader: false, //浏览器是否支持filereader，支持就本地预览，不支持就接口返回预览图
+		})
+	</script>
+</body>
+
+</html>
