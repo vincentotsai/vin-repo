@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>calender</title>
+    <script src="https://uicdn.toast.com/tui-calendar/latest/tui-calendar.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui-calendar/latest/tui-calendar.min.css" />
+</head>
+
+<body>
+    <div id="calendar" style="height: 800px;"></div>
+    <script>
+        var Calendar = tui.Calendar;
+        var calendar = new Calendar('#calendar', {
+            defaultView: 'month',
+            taskView: true,
+            template: {
+                monthGridHeader: function (model) {
+                    var date = new Date(model.date);
+                    var template = '<span class="tui-full-calendar-weekday-grid-date">' + date.getDate() +
+                        '</span>';
+                    return template;
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
