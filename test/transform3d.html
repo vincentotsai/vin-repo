@@ -17,6 +17,34 @@
             transform: perspective(0) translate3d(10px, 10px, 150px);
             background-color: pink;
         }
+
+        .enen {
+            animation: slidein 3s infinite;
+        }
+
+        @keyframes slidein {
+            from {
+                margin-left: 100%;
+                color: black;
+            }
+
+            to {
+                margin-left: 0%;
+                color: red;
+            }
+        }
+
+        @keyframes haha {
+            from {}
+        }
+
+        @media only screen and (max-width:375px) {
+            .haha {
+                height: 100px;
+                width: 100px;
+                background: gray;
+            }
+        }
     </style>
 </head>
 
@@ -24,6 +52,8 @@
     <div class="box1">static</div>
     <div class="moved">move</div>
     <div class="box2">static</div>
+    <p class="enen">ppp</p>
+    <div class="haha">haha</div>
 </body>
 
 </html>
