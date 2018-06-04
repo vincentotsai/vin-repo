@@ -67,6 +67,7 @@ typings/
 
 .DS_Store
 node_modules/
+vue-cli/mpa/node_modules
 dist/
 TODOs.md
 *.log
