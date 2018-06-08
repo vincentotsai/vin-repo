@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .wife {
+      right: 100%;
+      margin: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wife"></div>
+  <script>
+    // function start() {
+    //   (function middle() {
+    //     (function end() {
+    //       console.log('test');
+    //     })()
+    //   })()
+    // }
+    // start()
+
+    // 匿名函数
+    // (function () {
+    //   (function () {
+    //     (function () {
+    //       console.log('test');
+    //     })();
+    //   })();
+    // })();
+
+    function initiate(arguments) {
+      return new Promise(checkForArguments);
+    }
+
+    function checkForArguments(resolve, reject) {
+      try {
+        if (arguments) {
+          return resolve(true);
+        }
+        return resolve(false);
+      } catch (e) {
+        reject(e);
+      }
+    }
+
+    function evaluateRes(res) {
+      if (res) {
+        doSomethingElse(res);
+      } else {
+        doSomething();
+      }
+    }
+
+    function doSomethingElse(res) {
+      console.log(res)
+    }
+    function doSomething(res) {
+      console.log(res)
+    }
+
+    function handleError(e) {
+      logError(e.message);
+      restartApp();
+    }
+
+    initiate(true)
+      .then(evaluateRes)
+      .catch(handleError);
+  </script>
+</body>
+
+</html>
