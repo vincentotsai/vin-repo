@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8" lang="zh-CN" prefix="og: http://ogp.me/ns#"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9" lang="zh-CN" prefix="og: http://ogp.me/ns#"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class=no-js lang=zh-CN prefix="og: http://ogp.me/ns#">
+<!--<![endif]-->
+
+<head>
+  <meta charset=UTF-8>
+  <meta http-equiv=X-UA-Compatible content="IE=edge" />
+  <meta name=renderer content="webkit|ie-comp|ie-stand" />
+  <meta name=referrer content=always />
+  <meta name=viewport content="width=device-width, initial-scale=1">
+  <meta name=google-site-verification content=P385Stx_h4OjNQvJ-JUxLcbDW5rq9SiXlRwwMHOh1hY />
+  <link rel=profile href="http://gmpg.org/xfn/11">
+  <link rel=pingback href="https://www.wpzhiku.com/xmlrpc.php">
+  <link rel=dns-prefetch href='//wpzhiku.com' />
+  <link rel=dns-prefetch href='//www.wpzhiku.com' />
+  <link rel=dns-prefetch href='//static.wpcio.com' />
+  <link rel=dns-prefetch href='//hm.baidu.com' />
+  <title>网站加载 Waiting (TTFB) 时间过长的原因和解决办法 _WordPress 智库</title>
+  <meta name=description content="网站加载 Waiting (TTFB) 时间过长的原因一般是服务器或者网络原因，TTFB 时间过长的解决办法就是使用缓存静态化动态网页，优化服务器网络或者使用 CDN 减少 Waiting TTFB 时间。"
+  />
+  <link rel=canonical href="https://www.wpzhiku.com/wating-ttfb-too-long/" />
+  <meta property=og:locale content=zh_CN />
+  <meta property=og:type content=article />
+  <meta property=og:title content="网站加载 Waiting (TTFB) 时间过长的原因和解决办法 _WordPress 智库" />
+  <meta property=og:description content="网站加载 Waiting (TTFB) 时间过长的原因一般是服务器或者网络原因，TTFB 时间过长的解决办法就是使用缓存静态化动态网页，优化服务器网络或者使用 CDN 减少 Waiting TTFB 时间。"
+  />
+  <meta property=og:url content="https://www.wpzhiku.com/wating-ttfb-too-long/" />
+  <meta property=og:site_name content="WordPress 智库" />
+  <meta property=article:tag content="优化" />
+  <meta property=article:tag content="加速" />
+  <meta property=article:tag content="性能" />
+  <meta property=article:section content="后台开发" />
+  <meta property=article:published_time content="2017-11-30T08:56:15+08:00" />
+  <meta property=article:modified_time content="2018-05-30T15:19:36+08:00" />
+  <meta property=og:updated_time content="2018-05-30T15:19:36+08:00" />
+  <meta property=og:image content="https://static.wpcio.com/wp-content/uploads/2017/11/ttfb-too-long.png" />
+  <meta property=og:image:secure_url content="https://static.wpcio.com/wp-content/uploads/2017/11/ttfb-too-long.png" />
+  <meta property=og:image:width content=820 />
+  <meta property=og:image:height content=480 />
+  <meta property=og:image:alt content="网站加载 Waiting (TTFB) 时间过长" />
+  <script type='application/ld+json'>{"@context":"https:\/\/schema.org","@type":"Person","url":"https:\/\/www.wpzhiku.com\/","sameAs":[],"@id":"#person","name":"\u674e\u4e8c\u5e86"}</script>
+  <link rel=stylesheet id=enter-style-css href='https://static.wpcio.com/wp-content/themes/wpzhiku/front/dist/styles/main-cf7e092069.css'
+    type='text/css' media=all />
+  <script src='https://static.wpcio.com/wp-includes/js/jquery/jquery.js' type="text/psajs" data-pagespeed-orig-index=0></script>
+  <script src='https://static.wpcio.com/wp-includes/js/jquery/jquery-migrate.min.js' type="text/psajs" data-pagespeed-orig-index=1></script>
+  <link rel='https://api.w.org/' href='https://www.wpzhiku.com/wp-json/' />
+  <link rel=alternate type="application/json+oembed" href="https://www.wpzhiku.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.wpzhiku.com%2Fwating-ttfb-too-long%2F"
+  />
+  <link rel=alternate type="text/xml+oembed" href="https://www.wpzhiku.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.wpzhiku.com%2Fwating-ttfb-too-long%2F&#038;format=xml"
+  />
+  <link rel=amphtml href="https://www.wpzhiku.com/wating-ttfb-too-long/amp/">
+  <script type="text/psajs" data-pagespeed-orig-index=2>var _hmt=_hmt||[];(function(){var hm=document.createElement('script');hm.src='https://hm.baidu.com/hm.js?35d3c69f205894c811410de30ba1acc5';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(hm,s);})();</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-48812124-1" type="text/psajs" data-pagespeed-orig-index=3></script>
+  <script type="text/psajs" data-pagespeed-orig-index=4>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','UA-48812124-1');</script> </head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="post-template-default single single-post postid-4643 single-format-standard chrome">
+  <noscript>
+    <meta HTTP-EQUIV="refresh" content="0;url='https://www.wpzhiku.com/wating-ttfb-too-long/?PageSpeed=noscript'" />
+    <style>
+      table,
+      div,
+      span,
+      font,
+      p {
+        display: none
+      }
+
+    </style>
+    <div style="display:block">Please click
+      <a href="https://www.wpzhiku.com/wating-ttfb-too-long/?PageSpeed=noscript">here</a> if you are not redirected within a few seconds.</div>
+  </noscript>
+  <div id=page class=site>
+    <header id=masthead class=site-header>
+      <div class=md-topbar>
+        <div class=container>
+          <div class=level>
+            <div class=level-left> 欢迎光临 WordPress 智库！ </div>
+            <div class="level-right ">
+              <a href="https://www.wpzhiku.com/service">服务项目</a>
+              <a href="https://www.wpzhiku.com/hosts">托管运维</a>
+              <a href="https://www.wpzhiku.com/case">服务案例</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class=md-brand>
+        <div class=container>
+          <div class="columns is-gapless is-vcentered">
+            <div class="column is-two-thirds">
+              <h1 class=site-title>
+                <a class=navbar-brand href="https://www.wpzhiku.com/" rel=home>WordPress 智库</a>
+              </h1>
+            </div>
+            <div class="column text-right">
+              <form class="site-search is-hidden-mobile" role=search action="https://www.wpzhiku.com/">
+                <label class=sr-only for=s>搜索：</label>
+                <div class="input-group search-form">
+                  <input type=text class=form-control id=s name=s value="" required>
+                  <span class=input-group-addon>
+                    <input type=submit class="btn btn-warning search-button" value="搜索" /> </span>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <nav id=site-navigation class="navbar navbar-inverse main-navigation">
+        <div class=container>
+          <div class=navbar-header>
+            <button type=button class="navbar-toggle collapsed" data-toggle=collapse data-target="#navbar-main" aria-controls=navbar-main
+              aria-expanded=false>
+              <span class=sr-only>Toggle navigation</span>
+              <span class=icon-bar></span>
+              <span class=icon-bar></span>
+              <span class=icon-bar></span>
+            </button>
+            <span class="site-title is-hidden-tablet-only">
+              <a class=navbar-brand href="https://www.wpzhiku.com/" rel=home>菜单 & 搜索</a>
+            </span>
+          </div>
+          <div class="collapse navbar-collapse" id=navbar-main>
+            <ul id=menu-menu class="nav navbar-nav">
+              <li id=menu-item-5126 class=menu-item>
+                <a title="首页" href="/">首页</a>
+              </li>
+              <li id=menu-item-3544 class="menu-item menu-item-has-children dropdown">
+                <a title="WordPress 开发" href="#" data-toggle=dropdown class=dropdown-toggle aria-haspopup=true>WordPress 开发
+                  <span class=caret></span>
+                </a>
+                <ul role=menu class=" dropdown-menu">
+                  <li id=menu-item-1524 class=menu-item>
+                    <a title="主题开发" href="https://www.wpzhiku.com/category/skills/">主题开发</a>
+                  </li>
+                  <li id=menu-item-1523 class=menu-item>
+                    <a title="后台开发" href="https://www.wpzhiku.com/category/backend/">后台开发</a>
+                  </li>
+                  <li id=menu-item-3184 class=menu-item>
+                    <a title="前端技巧" href="https://www.wpzhiku.com/category/frontend/">前端技巧</a>
+                  </li>
+                  <li id=menu-item-2598 class=menu-item>
+                    <a title="文档翻译" href="/codex/">文档翻译</a>
+                  </li>
+                  <li role=presentation class=divider></li>
+                  <li id=menu-item-3774 class=menu-item>
+                    <a title="主题推荐" href="https://www.wpzhiku.com/category/themes/">主题推荐</a>
+                  </li>
+                  <li id=menu-item-3773 class=menu-item>
+                    <a title="插件推荐" href="https://www.wpzhiku.com/category/plugins/">插件推荐</a>
+                  </li>
+                  <li id=menu-item-3183 class=menu-item>
+                    <a title="开发资讯" href="https://www.wpzhiku.com/category/news/">开发资讯</a>
+                  </li>
+                </ul>
+              </li>
+              <li id=menu-item-3180 class="menu-item menu-item-has-children dropdown">
+                <a title="技术专题" href="#" data-toggle=dropdown class=dropdown-toggle aria-haspopup=true>技术专题
+                  <span class=caret></span>
+                </a>
+                <ul role=menu class=" dropdown-menu">
+                  <li id=menu-item-3675 class=menu-item>
+                    <a title="WooCommerce 开发" href="https://www.wpzhiku.com/tag/woocommerce/">WooCommerce 开发</a>
+                  </li>
+                  <li id=menu-item-4088 class=menu-item>
+                    <a title="在 WordPress 实现支付" href="https://www.wpzhiku.com/tag/%e6%94%af%e4%bb%98/">在 WordPress 实现支付</a>
+                  </li>
+                  <li id=menu-item-5540 class=menu-item>
+                    <a title="WordPress 多语言主题开发" href="https://www.wpzhiku.com/tag/%e5%a4%9a%e8%af%ad%e8%a8%80/">WordPress 多语言主题开发</a>
+                  </li>
+                  <li id=menu-item-3880 class=menu-item>
+                    <a title="WordPress 自定义字段" href="https://www.wpzhiku.com/tag/%e8%87%aa%e5%ae%9a%e4%b9%89%e5%ad%97%e6%ae%b5/">WordPress 自定义字段</a>
+                  </li>
+                  <li id=menu-item-3882 class=menu-item>
+                    <a title="WordPress 安全增强" href="https://www.wpzhiku.com/tag/%e5%ae%89%e5%85%a8/">WordPress 安全增强</a>
+                  </li>
+                  <li id=menu-item-5544 class=menu-item>
+                    <a title="WordPress 性能优化" href="https://www.wpzhiku.com/tag/%e4%bc%98%e5%8c%96/">WordPress 性能优化</a>
+                  </li>
+                  <li id=menu-item-3181 class=menu-item>
+                    <a title="深入理解WordPress数据库" href="https://www.wpzhiku.com/tag/godeep/">深入理解WordPress数据库</a>
+                  </li>
+                  <li id=menu-item-3354 class=menu-item>
+                    <a title="在 WordPress 中使用 Composer" href="https://www.wpzhiku.com/tag/composer/">在 WordPress 中使用 Composer</a>
+                  </li>
+                  <li id=menu-item-4760 class=menu-item>
+                    <a title="WordPress REST API" href="https://www.wpzhiku.com/tag/rest/">WordPress REST API</a>
+                  </li>
+                </ul>
+              </li>
+              <li id=menu-item-1976 class="menu-item menu-item-has-children dropdown">
+                <a title="本站插件" href="#" data-toggle=dropdown class=dropdown-toggle aria-haspopup=true>本站插件
+                  <span class=caret></span>
+                </a>
+                <ul role=menu class=" dropdown-menu">
+                  <li id=menu-item-5099 class=menu-item>
+                    <a title="Wenprise Better Emails 美化评论邮件" href="https://www.wpzhiku.com/wenprise-better-emails/">Wenprise Better Emails 美化评论邮件</a>
+                  </li>
+                  <li id=menu-item-5069 class=menu-item>
+                    <a title="Wenprise Pinyin Slug 别名转拼音" href="https://www.wpzhiku.com/wenprise-pinyin-slug/">Wenprise Pinyin Slug 别名转拼音</a>
+                  </li>
+                  <li id=menu-item-2368 class=menu-item>
+                    <a title="Wizhi Multi Filters 多条件筛选" href="https://www.wpzhiku.com/wizhi-multi-filters/">Wizhi Multi Filters 多条件筛选</a>
+                  </li>
+                  <li id=menu-item-1979 class=menu-item>
+                    <a title="Wizhi CMS 主题开发框架" href="https://www.wpzhiku.com/wordpress-cms-plugin-wizhi-cms/">Wizhi CMS 主题开发框架</a>
+                  </li>
+                  <li id=menu-item-2382 class=menu-item>
+                    <a title="Wizhi Optimization 中文优化" href="https://www.wpzhiku.com/wizhi-optimization/">Wizhi Optimization 中文优化</a>
+                  </li>
+                  <li id=menu-item-2380 class=menu-item>
+                    <a title="Wizhi Submenus 子菜单" href="https://www.wpzhiku.com/wizhi-submenus/">Wizhi Submenus 子菜单</a>
+                  </li>
+                  <li id=menu-item-5098 class=menu-item>
+                    <a title="所有插件" href="https://www.wpzhiku.com/tag/plugin/">所有插件</a>
+                  </li>
+                </ul>
+              </li>
+              <li id=menu-item-1260 class=menu-item>
+                <a title="服务项目" href="https://www.wpzhiku.com/service/">服务项目</a>
+              </li>
+              <li id=menu-item-3721 class=menu-item>
+                <a title="服务案例" href="https://www.wpzhiku.com/case/">服务案例</a>
+              </li>
+              <li id=menu-item-4064 class=menu-item>
+                <a title="托管运维" href="https://www.wpzhiku.com/hosts/">托管运维</a>
+              </li>
+              <li id=menu-item-776 class=menu-item>
+                <a title="关于我们" href="https://www.wpzhiku.com/about/">关于我们</a>
+              </li>
+            </ul>
+            <form class="navbar-form navbar-left is-hidden-tablet is-hidden-tablet-only" role=search action="https://www.wpzhiku.com/">
+              <label class=sr-only for=s>搜索：</label>
+              <div class="input-group search-form">
+                <input type=text class=form-control id=s name=s value="" required>
+                <span class=input-group-addon>
+                  <input type=submit class="btn btn-warning search-button" value="搜索" /> </span>
+              </div>
+            </form>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <div id=content class=site-content>
+      <header class=entry-header>
+        <div class=container>
+          <h1 itemprop="name headline" class=entry-title>网站加载 Waiting (TTFB) 时间过长的原因和解决办法</h1>
+          <div class=entry-meta>
+            <span class=iconfont>&#xe601;</span>
+            <time itemprop=datePublished class="updated mr5" content="2017-11-30T08:56:15+00:00" datetime="2017-11-30T08:56:15+00:00">
+            2017/11/30 </time>
+            <time itemprop=dateModified class=hide content="2018-05-30T15:19:36+00:00" datetime="2018-05-30T15:19:36+00:00">
+            2018/05/30 </time>
+            <span class=iconfont>&#xe611;</span>
+            <span class=typo-small>187</span>
+            <div class=ratings>评分：
+              <div class=rate-holder itemtype="http://schema.org/AggregateRating" itemscope="" itemprop=aggregateRating>
+                <div class=post-rate>
+                  <div class=rating-stars title="评分 4.83, 满分 5 星" style="width:96.6%">评分
+                    <span class=average itemprop=ratingValue>4.83</span>, 满分
+                    <span>5 星</span>
+                  </div>
+                </div>
+                <div class=piao>
+                  <span itemprop=ratingCount>6</span> 票</div>
+                <div data-post-id=4643 class=rating-combo>
+                  <a class=rating-toggle href="javascript:;" rel=nofollow>+Add</a>
+                  <ul>
+                    <li>
+                      <a data-rating=5 rel=nofollow>
+                        <span class=rating-star>
+                          <i class=star-5-0></i>
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a data-rating=4 rel=nofollow>
+                        <span class=rating-star>
+                          <i class=star-4-0></i>
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a data-rating=3 rel=nofollow>
+                        <span class=rating-star>
+                          <i class=star-3-0></i>
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a data-rating=2 rel=nofollow>
+                        <span class=rating-star>
+                          <i class=star-2-0></i>
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a data-rating=1 rel=nofollow>
+                        <span class=rating-star>
+                          <i class=star-1-0></i>
+                        </span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <meta content=5 itemprop=bestRating>
+                <meta content=1 itemprop=worstRating>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+      <div class=container>
+        <div class="pure-g row eqh">
+          <div id=primary class="pure-u-1 pure-u-lg-3-4 content-area">
+            <main itemscope itemtype="http://schema.org/Article" id=main class="col site-main">
+              <meta itemscope itemprop=mainEntityOfPage itemtype="https://schema.org/WebPage" itemid="https://www.wpzhiku.com/wating-ttfb-too-long/#main"
+              />
+              <article id=post-4643 class="post-4643 post type-post status-publish format-standard has-post-thumbnail hentry category-backend tag-10 tag-36 tag-102 typo">
+                <header class=entry-header>
+                  <h1 itemprop="name headline" class=entry-title>网站加载 Waiting (TTFB) 时间过长的原因和解决办法</h1>
+                  <div class=entry-meta>
+                    <span class=iconfont>&#xe601;</span>
+                    <time itemprop=datePublished class=updated content="2017-11-30T08:56:15+00:00" datetime="2017-11-30T08:56:15+00:00">
+                    2017/11/30 </time>
+                    <time itemprop=dateModified class=hide content="2018-05-30T15:19:36+00:00" datetime="2018-05-30T15:19:36+00:00">
+                    2018/05/30 </time>
+                    <div class=ratings>评分：
+                      <div class=rate-holder itemtype="http://schema.org/AggregateRating" itemscope="" itemprop=aggregateRating>
+                        <div class=post-rate>
+                          <div class=rating-stars title="评分 4.83, 满分 5 星" style="width:96.6%">评分
+                            <span class=average itemprop=ratingValue>4.83</span>, 满分
+                            <span>5 星</span>
+                          </div>
+                        </div>
+                        <div class=piao>
+                          <span itemprop=ratingCount>6</span> 票</div>
+                        <div data-post-id=4643 class=rating-combo>
+                          <a class=rating-toggle href="javascript:;" rel=nofollow>+Add</a>
+                          <ul>
+                            <li>
+                              <a data-rating=5 rel=nofollow>
+                                <span class=rating-star>
+                                  <i class=star-5-0></i>
+                                </span>
+                              </a>
+                            </li>
+                            <li>
+                              <a data-rating=4 rel=nofollow>
+                                <span class=rating-star>
+                                  <i class=star-4-0></i>
+                                </span>
+                              </a>
+                            </li>
+                            <li>
+                              <a data-rating=3 rel=nofollow>
+                                <span class=rating-star>
+                                  <i class=star-3-0></i>
+                                </span>
+                              </a>
+                            </li>
+                            <li>
+                              <a data-rating=2 rel=nofollow>
+                                <span class=rating-star>
+                                  <i class=star-2-0></i>
+                                </span>
+                              </a>
+                            </li>
+                            <li>
+                              <a data-rating=1 rel=nofollow>
+                                <span class=rating-star>
+                                  <i class=star-1-0></i>
+                                </span>
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                        <meta content=5 itemprop=bestRating>
+                        <meta content=1 itemprop=worstRating>
+                      </div>
+                    </div>
+                  </div>
+                </header>
+                <div itemprop=articleBody class=entry-content>
+                  <div class=hide itemprop=image itemscope itemtype="https://schema.org/ImageObject">
+                    <img src="https://static.wpcio.com/wp-content/uploads/2017/11/ttfb-too-long-176x91.png" alt="网站加载 Waiting (TTFB) 时间过长的原因和解决办法"
+                    />
+                    <meta itemprop=url content="https://static.wpcio.com/wp-content/uploads/2017/11/ttfb-too-long-176x91.png">
+                    <meta itemprop=width content=176>
+                    <meta itemprop=height content=91> </div>
+                  <p>关注网页前端性能的朋友，在优化网页性能的时候都会遇到网站加载
+                    <strong>Waiting（TTFB）时间过长</strong>的问题。对于没有优化过的 WordPress 站点，TTFB 时间经常超过了页面内容的下载时间，为用户带来不必要的等待时间。这个问题的主要原因是在服务器端，不熟悉
+                    <a
+                      href="https://www.wpzhiku.com/hosts/" target=_blank rel=noopener>服务器运维</a>的朋友优化起来可能会不知道从哪里下手，今天我们就从各方面分析一下网站加载 Waiting (TTFB) 时间过长的原因和解决办法。</p>
+                  <h2 id=shen-me-shi-Waiting-TTFB-shi-jian>什么是 Waiting (TTFB) 时间</h2>
+                  <p>TTFB 是 Time to First Byte 的缩写，指的是浏览器开始收到服务器响应数据的时间（后台处理时间+重定向时间），是反映服务端响应速度的重要指标。就像你问朋友了一个问题，你的朋友思考了一会儿才给你答案，你朋友思考的时间就相当于
+                    TTFB。你朋友思考的时间越短，就说明你朋友越聪明或者对你的问题越熟悉。对服务器来说，TTFB 时间越短，就说明服务器响应越快。</p>
+                  <h2 id=TTFB-shi-jian-duo-zhang-suan-zhang>TTFB 时间多长算长？</h2>
+                  <p>因为每个服务器的硬件和网络环境都不尽相同，每个服务器的 TTFB 时间也不相同。如果想知道你的服务器可以优化到什么程度，大家可以上传一些静态的 HTML 页面到服务器，然后打开这些静态页面，看一些这些页面的
+                    TTFB 时间，大多数服务器的 TTFB 时间都在 50 ms 以下，这个时间就是我们优化时候可以追求的时间。下面两个图中的 TTFB 时间分别是本站所在服务器的静态和动态网页 TTFB 等待时间。</p>
+                  <figure id=attachment_4683 style=width:857px class="wp-caption alignnone">
+                    <img class="wp-image-4683 size-full" src="https://static.wpcio.com/wp-content/uploads/2017/11/ttfb-static.png"
+                      alt="静态网页 waiting （ttfb）时间" width=857 height=336 srcset="https://static.wpcio.com/wp-content/uploads/2017/11/ttfb-static.png 857w, https://static.wpcio.com/wp-content/uploads/2017/11/ttfb-static-600x235.png 600w, https://static.wpcio.com/wp-content/uploads/2017/11/ttfb-static-768x301.png 768w"
+                      sizes="(max-width: 857px) 100vw, 857px" />
+                    <figcaption class=wp-caption-text>静态网页 Waiting （TTFB）时间</figcaption>
+                  </figure>
+                  <figure id=attachment_4684 style=width:860px class="wp-caption alignnone">
+                    <img class="wp-image-4684 size-full" src="https://static.wpcio.com/wp-content/uploads/2017/11/ttfb-dynamic.png"
+                      alt="动态网页 waiting （ttfb）时间" width=860 height=336 srcset="https://static.wpcio.com/wp-content/uploads/2017/11/ttfb-dynamic.png 860w, https://static.wpcio.com/wp-content/uploads/2017/11/ttfb-dynamic-600x234.png 600w, https://static.wpcio.com/wp-content/uploads/2017/11/ttfb-dynamic-768x300.png 768w"
+                      sizes="(max-width: 860px) 100vw, 860px" />
+                    <figcaption class=wp-caption-text>动态网页 Waiting （TTFB）时间</figcaption>
+                  </figure>
+                  <p>根据我们的测试，TTFB 时间如果超过了 500 ms，用户在打开网页的时候就会感觉到明显的等待。我么可以把 500 ms 以上认为是 TTFB 时间过长。可见，WordPress 智库的服务器还不算差。</p>
+                  <h2 id=TTFB-guo-chang-de-yuan-yin>TTFB 过长的原因</h2>
+                  <p>我们知道，对于动态网页来说，服务器收到用户打开一个页面的请求时，首先要从数据库中读取该页面需要的数据，然后把这些数据传入到模版中，模版渲染后，再返回给用户。由于查询数据和渲染模版需要需要一定的时间，在这个过程没有完成之前，浏览器就一致处于等待接收服务器响应的状态。有些服务的性能比较低，或者优化没做好，这个时间就会比较长。</p>
+                  <p>当然，如果服务器到用户之间的网络不好，（比如，服务器在欧洲，用户在中国，用户打开网页的时候，请求需要跨越千山万水才能达到服务器），服务器接收到用户请求的时间过长，也是导致 TTFB 时间过长的原因。</p>
+                  <p>有时候，页面在用户的浏览器中保存了过多的 Cookie，每次请求，这些 Cookie 都要发送到服务器，服务器都要处理这些 Cookie，这也是导致 TTFB 时间过长的原因之一。</p>
+                  <h2 id=Waiting-TTFB-shi-jian-guo-chang-de-jie-jue-ban-fa>Waiting (TTFB) 时间过长的解决办法</h2>
+                  <p>知道了原因，解决办法就显而易见了，那就是缩短服务器响应时间，最简单直接并且有效的办法就是使用缓存，把 PHP 和 MySQL 的执行时间最小化，一些缓存插件可以把 SQL 查询结果缓存起来，把几十次查询结果转换为几次；一些缓存插件可以直接把用户所请求的页面静态化，用户打开网页时，相当于直接从服务器上下载了静态页面。</p>
+                  <p>如果是网络原因，换一个服务器是比较直接的解决办法。如果因为一些原因不能换服务器，可以使用一个
+                    <a href="https://www.wpzhiku.com/wp-cdn-rewrite-qiniu-colud/"
+                      target=_blank rel=noopener>CDN</a>，把页面同步到离用户比较近的 CDN 节点上，也是一个不错的解决办法。</p>
+                  <p>如果是 Cookie 的原因，可以通过修改应用程序，删除一些不必要的 Cookie，或者精简 Cookie 内容，缩短 Cookie 的有效期等，都是解决办法。</p>
+                  <p>本站使用的是
+                    <a href="https://www.wpzhiku.com/cachify/" target=_blank rel=noopener>Cachify 插件 Memcached 缓存方式</a>，直接把用户请求过的页面，缓存到了内存中，网站加载 Waiting (TTFB) 时间达到了 50 ms 左右，感兴趣的朋友可以用谷歌浏览器的调试工具查看一下。</p>
+                </div>
+                <footer class=entry-footer>
+                  <a class=hide itemprop=url href="https://www.wpzhiku.com/wating-ttfb-too-long/">固定链接</a>
+                  <div class=vcard>
+                    <b>作者：</b>
+                    <span itemprop=author itemscope itemtype="http://schema.org/Person">
+                      <span itemprop=name>
+                        <a class="fn url" href="https://www.wpzhiku.com">一刀</a>
+                      </span>
+                    </span>
+                  </div>
+                  <div class=hide itemprop=publisher itemscope itemtype="https://schema.org/Organization">
+                    <div itemprop=logo itemscope itemtype="https://schema.org/ImageObject">
+                      <img src="https://static.wpcio.com/wp-content/themes/wpzhiku/front/dist/images/avatar.png" />
+                      <meta itemprop=url content="https://static.wpcio.com/wp-content/themes/wpzhiku/front/dist/images/avatar.png">
+                      <meta itemprop=width content=96>
+                      <meta itemprop=height content=96> </div>
+                    <meta itemprop=name content="WordPress 智库"> </div>
+                  <div class=entry-tags>
+                    <b>标签：</b>
+                    <span class=badge>
+                      <a href="https://www.wpzhiku.com/tag/%e4%bc%98%e5%8c%96/" rel=tag>优化</a>
+                    </span>
+                    <span class=badge>
+                      <a href="https://www.wpzhiku.com/tag/%e5%8a%a0%e9%80%9f/" rel=tag>加速</a>
+                    </span>
+                    <span class=badge>
+                      <a href="https://www.wpzhiku.com/tag/%e6%80%a7%e8%83%bd/" rel=tag>性能</a>
+                    </span>
+                  </div>
+                  <div id=so-share>
+                    <b>分享：</b>
+                  </div>
+                </footer>
+              </article>
+              <div class="alert alert-info media media-bio">
+                <div class=media-left>
+                  <a href="https://www.wpzhiku.com/about">
+                    <img src="https://static.wpcio.com/wp-content/themes/wpzhiku/front/dist/images/avatar.png" alt="一刀（WordPress智库站长）"
+                      class="img-circle media-object" height=64 width=64> </a>
+                </div>
+                <div class=media-body>
+                  <h4 class=media-heading>
+                    <a class=alert-link href="https://www.wpzhiku.com/service">本站提供 WordPress 主题定制开发服务</a>
+                  </h4>
+                  <div> 本站长期承接 WordPress 主题、插件、基于 WooCommerce 的商店商城开发业务。 我们有 8 年 WordPress 开发经验，如果你想
+                    <a target=_blank href="https://www.wpzhiku.com/service/">用 WordPress 开发网站</a>, 请联系 QQ: 470266798，或邮箱: 4626395@gmail.com 咨询。 </div>
+                </div>
+              </div>
+              <div class=related-posts>
+                <div class=rpbt_shortcode>
+                  <div class="clearfix block-title topnews-cats">
+                    <h2 class="title-item active">
+                      <a href="#">相关文章</a>
+                    </h2>
+                  </div>
+                  <section class="columns is-multiline is-tablet c-card-related">
+                    <article class="column is-one-third">
+                      <a href="https://www.wpzhiku.com/nginx-pagespeed/">
+                        <div class=card>
+                          <div class=card-image>
+                            <figure class="image is-276by180 is-23by15">
+                              <img width=276 height=180 src="https://static.wpcio.com/wp-content/uploads/2017/03/NGX_pagespeed_tw-276x180.png"
+                                class="attachment-276x180x1 size-276x180x1" alt="" />
+                            </figure>
+                          </div>
+                          <header class=card-header>
+                            <h3 class=card-header-title>使用 ngx_pagespeed 优化前端页面，提高 WordP...</h3>
+                          </header>
+                        </div>
+                      </a>
+                    </article>
+                    <article class="column is-one-third">
+                      <a href="https://www.wpzhiku.com/wordpress-user-center-get-users-post-count-and-comment-count/">
+                        <div class=card>
+                          <div class=card-image>
+                            <figure class="image is-276by180 is-23by15">
+                              <img width=276 height=180 src="https://static.wpcio.com/wp-content/uploads/2014/02/wordpress-logo-276x180.png"
+                                class="attachment-276x180x1 size-276x180x1" alt="" />
+                            </figure>
+                          </div>
+                          <header class=card-header>
+                            <h3 class=card-header-title>WordPress 用户中心开发获取某用户发表的文章...</h3>
+                          </header>
+                        </div>
+                      </a>
+                    </article>
+                    <article class="column is-one-third">
+                      <a href="https://www.wpzhiku.com/improve-query-with-transients-saving-db-requests/">
+                        <div class=card>
+                          <div class=card-image>
+                            <figure class="image is-276by180 is-23by15">
+                              <img width=276 height=180 src="https://static.wpcio.com/wp-content/uploads/2014/08/scaled_keyvalue-276x180.png"
+                                class="attachment-276x180x1 size-276x180x1" alt="" />
+                            </figure>
+                          </div>
+                          <header class=card-header>
+                            <h3 class=card-header-title>使用 WordPress Transients API 缓存查询结果...</h3>
+                          </header>
+                        </div>
+                      </a>
+                    </article>
+                  </section>
+                </div>
+              </div>
+              <div id=comments class=comments-area>
+                <div id=respond class=comment-respond>
+                  <h3 id=reply-title class=comment-reply-title>发表评论
+                    <small>
+                      <a rel=nofollow id=cancel-comment-reply-link href="/wating-ttfb-too-long/#respond" style=display:none>取消回复</a>
+                    </small>
+                  </h3>
+                  <form action="https://www.wpzhiku.com/wp-comments-post.php" method=post id=commentform class="pure-form pure-form-stacked"
+                    novalidate>
+                    <p class=comment-notes>
+                      <span id=email-notes>电子邮件地址不会被公开。</span> 必填项已用
+                      <span class=required>*</span>标注</p>
+                    <p class=comment-form-comment>
+                      <label for=comment>评论</label>
+                      <textarea id=comment class=form-control name=comment cols=45 rows=8 aria-required=true></textarea>
+                    </p>
+                    <p class="form-group comment-form-author">
+                      <label for=author>昵称</label>
+                      <span class=required>*</span>
+                      <input id=author class=form-control name=author type=text value="" size=30 aria-required=true
+                      />
+                    </p>
+                    <p class="form-group comment-form-email">
+                      <label for=email>邮箱 </label>
+                      <span class=required>*</span>
+                      <input id=email class=form-control name=email type=text value="" size=30 aria-required=true
+                      />
+                    </p>
+                    <p class="form-group comment-form-url">
+                      <label for=url>网址</label>
+                      <input id=url class=form-control name=url type=text value="" size=30 />
+                    </p>
+                    <p class=form-submit>
+                      <input name=submit type=submit id=submit class="btn btn-primary" value="发表评论" />
+                      <input type=hidden name=comment_post_ID value=4643 id=comment_post_ID />
+                      <input type=hidden name=comment_parent id=comment_parent value=0 /> </p>
+                  </form>
+                </div>
+              </div>
+            </main>
+          </div>
+          <aside id=secondary class="pure-u-1 pure-u-lg-1-4 widget-area">
+            <div class=col>
+              <section id=categories-2 class="widget widget_categories">
+                <h2 class=widget-title>分类目录</h2>
+                <ul>
+                  <li class="cat-item cat-item-2">
+                    <a href="https://www.wpzhiku.com/category/themes/" title="WordPress 主题推荐为大家提供免费和付费的优秀 WordPress 主题，推荐中会说明 WordPress 主题的一些特色和使用方法。">WordPress 主题推荐</a>
+                  </li>
+                  <li class="cat-item cat-item-1">
+                    <a href="https://www.wpzhiku.com/category/news/" title="本栏目提供有关 WordPress 的新闻资讯，趋势动态等信息；对 WordPress 的一些现状发表一些看法，对 WordPress 进行观察和讨论。">WordPress 资讯</a>
+                  </li>
+                  <li class="cat-item cat-item-47">
+                    <a href="https://www.wpzhiku.com/category/skills/" title="本栏目提供 WordPress 主题开发制作，WordPress 模版开发修改，WordPress 网站集成等 WordPress 开发方面的资讯和技巧。">主题开发</a>
+                  </li>
+                  <li class="cat-item cat-item-38">
+                    <a href="https://www.wpzhiku.com/category/frontend/" title="WordPress 主题开发和前端是分不开的，这里分享了一些 WordPress 前端开发的一些经验和技巧。">前端技巧</a>
+                  </li>
+                  <li class="cat-item cat-item-104">
+                    <a href="https://www.wpzhiku.com/category/backend/" title="本栏目为大家提供 WordPress 后台自定义开发的一些经验技巧，帮助大家对 WordPress 后台进行个性化定制开发，以实现更方面的内容发布和管理。">后台开发</a>
+                  </li>
+                  <li class="cat-item cat-item-3">
+                    <a href="https://www.wpzhiku.com/category/plugins/" title="本栏目针对各方面的需求，推荐了一些能实现某方面功能的 WordPress 插件，对于国外的一些优秀插件，我们还会选择一部分进行汉化，欢迎下载使用。">插件推荐</a>
+                  </li>
+                  <li class="cat-item cat-item-326">
+                    <a href="https://www.wpzhiku.com/category/marketing/">网站运营</a>
+                  </li>
+                </ul>
+              </section>
+              <section id=media_image-2 class="widget widget_media_image">
+                <a href="http://www.vultr.com/?ref=6981792-3B" target=_blank>
+                  <img width=300 height=250 src="https://static.wpcio.com/wp-content/uploads/2016/09/vultr.jpg" class="image wp-image-3780 attachment-full size-full"
+                    alt="Vultr 高性能 VPS $5/月" style="max-width:100%;height:auto" />
+                </a>
+              </section>
+              <section id=enter_latest_posts_widget-4 class="widget widget_enter_latest_posts_widget">
+                <h2 class=widget-title>最新文章</h2>
+                <div class="widget_recent_entries widget_latest_posts">
+                  <ul>
+                    <li>
+                      <a target=_blank href="https://www.wpzhiku.com/wp-queue/">使用 WP Queue 在 WordPress 中实现任务队列执行耗时操作</a>
+                      <span class=post-date>2018/05/01</span>
+                    </li>
+                    <li>
+                      <a target=_blank href="https://www.wpzhiku.com/delete-orphaned-post-meta-data-in-wordpress/">移除 WordPress 数据库中无用的孤立 Post Meta 数据</a>
+                      <span class=post-date>2018/04/28</span>
+                    </li>
+                    <li>
+                      <a target=_blank href="https://www.wpzhiku.com/jwt-authentication-for-wp-rest-api/">使用 JWT Authentication 验证 WordPress REST API 权限</a>
+                      <span class=post-date>2018/04/24</span>
+                    </li>
+                    <li>
+                      <a target=_blank href="https://www.wpzhiku.com/add-trackback-notification-to-wordpress-crm/">使用计划任务在 WordPress CRM 中添加定期回访提醒</a>
+                      <span class=post-date>2018/04/19</span>
+                    </li>
+                    <li>
+                      <a target=_blank href="https://www.wpzhiku.com/add-custom-filter-to-wordprss-admin-post-list/">WordPress 后台文章列表添加自定义过滤筛选条件</a>
+                      <span class=post-date>2018/04/06</span>
+                    </li>
+                  </ul>
+                </div>
+              </section>
+              <section id=most_rated-2 class="widget widget_most_rated">
+                <h2 class=widget-title>最受欢迎的文章</h2>
+                <ul class=fancyratings-posts>
+                  <li>
+                    <a href="https://www.wpzhiku.com/wizhi-multi-filters/" rel=bookmark title="本站开发的 WordPress 多条件筛选过滤插件 &#8211; Wizhi Multi Filters">
+                    本站开发的 WordPress 多条件筛选过滤插件 &#8211; Wizhi Multi Filters </a>
+                    <div class=rate-holder>
+                      <div class=post-rate>
+                        <div class=rating-stars title="评分 4.41, 满分 5 星" style="width:88.2%">评分 4.41, 满分 5 星</div>
+                      </div>
+                      <div class=piao>111 票</div>
+                    </div>
+                  </li>
+                  <li>
+                    <a href="https://www.wpzhiku.com/instantclick/" rel=bookmark title="使用 InstantClick 预加载提高站内链接打开速度"> 使用 InstantClick 预加载提高站内链接打开速度 </a>
+                    <div class=rate-holder>
+                      <div class=post-rate>
+                        <div class=rating-stars title="评分 4.32, 满分 5 星" style="width:86.4%">评分 4.32, 满分 5 星</div>
+                      </div>
+                      <div class=piao>77 票</div>
+                    </div>
+                  </li>
+                  <li>
+                    <a href="https://www.wpzhiku.com/wordpress-cms-plugin-wizhi-cms/" rel=bookmark title="WordPress CMS 主题、企业主题开发插件 Wizhi CMS">
+                    WordPress CMS 主题、企业主题开发插件 Wizhi CMS </a>
+                    <div class=rate-holder>
+                      <div class=post-rate>
+                        <div class=rating-stars title="评分 4.51, 满分 5 星" style="width:90.2%">评分 4.51, 满分 5 星</div>
+                      </div>
+                      <div class=piao>57 票</div>
+                    </div>
+                  </li>
+                  <li>
+                    <a href="https://www.wpzhiku.com/add-css-class-to-wordpress-posts-loop/" rel=bookmark title="给WordPress文章循环加上CSS类方便实现各种页面布局">
+                    给WordPress文章循环加上CSS类方便实现各种页面布局 </a>
+                    <div class=rate-holder>
+                      <div class=post-rate>
+                        <div class=rating-stars title="评分 4.02, 满分 5 星" style="width:80.4%">评分 4.02, 满分 5 星</div>
+                      </div>
+                      <div class=piao>48 票</div>
+                    </div>
+                  </li>
+                  <li>
+                    <a href="https://www.wpzhiku.com/get-user-percent-ranking-according-there-post-ccount/" rel=bookmark title="根据用户发表的文章数量计算用户的百分比排名，显示用户排名超过了百分之多少的用户">
+                    根据用户发表的文章数量计算用户的百分比排名，显示用户排名超过了百分之多少的用户 </a>
+                    <div class=rate-holder>
+                      <div class=post-rate>
+                        <div class=rating-stars title="评分 4.20, 满分 5 星" style="width:84%">评分 4.20, 满分 5 星</div>
+                      </div>
+                      <div class=piao>41 票</div>
+                    </div>
+                  </li>
+                </ul>
+              </section>
+              <div id=scrool-fixed> </div>
+              <section class="widget widget_tag_cloud">
+                <h2 class=widget-title>热点关注</h2>
+                <a href="https://www.wpzhiku.com/tag/ajax/" class="tag-cloud-link tag-link-52 tag-link-position-1"
+                  style=font-size:13.5px aria-label="Ajax (8个项目)">Ajax</a>
+                <a href="https://www.wpzhiku.com/tag/api/" class="tag-cloud-link tag-link-88 tag-link-position-2"
+                  style=font-size:15.529411764706px aria-label="API (14个项目)">API</a>
+                <a href="https://www.wpzhiku.com/tag/cms/" class="tag-cloud-link tag-link-93 tag-link-position-3"
+                  style=font-size:14.647058823529px aria-label="CMS (11个项目)">CMS</a>
+                <a href="https://www.wpzhiku.com/tag/composer/" class="tag-cloud-link tag-link-275 tag-link-position-4"
+                  style=font-size:14.294117647059px aria-label="Composer (10个项目)">Composer</a>
+                <a href="https://www.wpzhiku.com/tag/jquery/" class="tag-cloud-link tag-link-49 tag-link-position-5"
+                  style=font-size:14.911764705882px aria-label="jQuery (12个项目)">jQuery</a>
+                <a href="https://www.wpzhiku.com/tag/rest/" class="tag-cloud-link tag-link-136 tag-link-position-6"
+                  style=font-size:14.647058823529px aria-label="REST API (11个项目)">REST API</a>
+                <a href="https://www.wpzhiku.com/tag/seo/" class="tag-cloud-link tag-link-118 tag-link-position-7"
+                  style=font-size:12.617647058824px aria-label="SEO (6个项目)">SEO</a>
+                <a href="https://www.wpzhiku.com/tag/woocommerce/" class="tag-cloud-link tag-link-127 tag-link-position-8"
+                  style=font-size:18px aria-label="WooCommerce (28个项目)">WooCommerce</a>
+                <a href="https://www.wpzhiku.com/tag/wordpress%e6%95%b0%e6%8d%ae%e5%ba%93/" class="tag-cloud-link tag-link-251 tag-link-position-9"
+                  style=font-size:13.5px aria-label="WordPress 数据库 (8个项目)">WordPress 数据库</a>
+                <a href="https://www.wpzhiku.com/tag/wp_query/" class="tag-cloud-link tag-link-37 tag-link-position-10"
+                  style=font-size:12px aria-label="WP_Query (5个项目)">WP_Query</a>
+                <a href="https://www.wpzhiku.com/tag/%e4%b8%bb%e9%a2%98/" class="tag-cloud-link tag-link-126 tag-link-position-11"
+                  style=font-size:15.529411764706px aria-label="主题 (14个项目)">主题</a>
+                <a href="https://www.wpzhiku.com/tag/%e4%bb%a3%e7%a0%81%e7%89%87%e6%ae%b5/" class="tag-cloud-link tag-link-12 tag-link-position-12"
+                  style=font-size:12px aria-label="代码片段 (5个项目)">代码片段</a>
+                <a href="https://www.wpzhiku.com/tag/%e4%bc%98%e5%8c%96/" class="tag-cloud-link tag-link-10 tag-link-position-13"
+                  style=font-size:17.735294117647px aria-label="优化 (26个项目)">优化</a>
+                <a href="https://www.wpzhiku.com/tag/%e5%87%bd%e6%95%b0/" class="tag-cloud-link tag-link-31 tag-link-position-14"
+                  style=font-size:14.911764705882px aria-label="函数 (12个项目)">函数</a>
+                <a href="https://www.wpzhiku.com/tag/%e5%88%86%e7%b1%bb%e5%88%97%e8%a1%a8/" class="tag-cloud-link tag-link-48 tag-link-position-15"
+                  style=font-size:12.617647058824px aria-label="分类列表 (6个项目)">分类列表</a>
+                <a href="https://www.wpzhiku.com/tag/%e5%88%86%e9%a1%b5/" class="tag-cloud-link tag-link-41 tag-link-position-16"
+                  style=font-size:12px aria-label="分页 (5个项目)">分页</a>
+                <a href="https://www.wpzhiku.com/tag/%e5%89%8d%e7%ab%af/" class="tag-cloud-link tag-link-43 tag-link-position-17"
+                  style=font-size:14.294117647059px aria-label="前端 (10个项目)">前端</a>
+                <a href="https://www.wpzhiku.com/tag/%e5%8a%9f%e8%83%bd/" class="tag-cloud-link tag-link-99 tag-link-position-18"
+                  style=font-size:12px aria-label="功能 (5个项目)">功能</a>
+                <a href="https://www.wpzhiku.com/tag/%e5%8a%a0%e9%80%9f/" class="tag-cloud-link tag-link-36 tag-link-position-19"
+                  style=font-size:16.235294117647px aria-label="加速 (17个项目)">加速</a>
+                <a href="https://www.wpzhiku.com/tag/%e5%90%8e%e5%8f%b0/" class="tag-cloud-link tag-link-15 tag-link-position-20"
+                  style=font-size:13.058823529412px aria-label="后台 (7个项目)">后台</a>
+                <a href="https://www.wpzhiku.com/tag/%e5%90%8e%e5%8f%b0%e5%ae%9a%e5%88%b6/" class="tag-cloud-link tag-link-21 tag-link-position-21"
+                  style=font-size:16.941176470588px aria-label="后台定制 (21个项目)">后台定制</a>
+                <a href="https://www.wpzhiku.com/tag/%e5%ae%89%e5%85%a8/" class="tag-cloud-link tag-link-29 tag-link-position-22"
+                  style=font-size:16.411764705882px aria-label="安全 (18个项目)">安全</a>
+                <a href="https://www.wpzhiku.com/tag/%e5%ae%98%e6%96%b9%e5%87%bd%e6%95%b0/" class="tag-cloud-link tag-link-34 tag-link-position-23"
+                  style=font-size:14.647058823529px aria-label="官方函数 (11个项目)">官方函数</a>
+                <a href="https://www.wpzhiku.com/tag/%e6%80%a7%e8%83%bd/" class="tag-cloud-link tag-link-102 tag-link-position-24"
+                  style=font-size:12px aria-label="性能 (5个项目)">性能</a>
+                <a href="https://www.wpzhiku.com/tag/%e6%8f%92%e4%bb%b6/" class="tag-cloud-link tag-link-78 tag-link-position-25"
+                  style=font-size:14.911764705882px aria-label="插件 (12个项目)">插件</a>
+                <a href="https://www.wpzhiku.com/tag/plugin/" class="tag-cloud-link tag-link-157 tag-link-position-26"
+                  style=font-size:13.058823529412px aria-label="插件发布 (7个项目)">插件发布</a>
+                <a href="https://www.wpzhiku.com/tag/%e6%94%af%e4%bb%98/" class="tag-cloud-link tag-link-277 tag-link-position-27"
+                  style=font-size:13.5px aria-label="支付 (8个项目)">支付</a>
+                <a href="https://www.wpzhiku.com/tag/%e6%95%b0%e6%8d%ae%e5%ba%93/" class="tag-cloud-link tag-link-56 tag-link-position-28"
+                  style=font-size:15.264705882353px aria-label="数据库 (13个项目)">数据库</a>
+                <a href="https://www.wpzhiku.com/tag/%e6%96%87%e7%ab%a0%e7%b1%bb%e5%9e%8b/" class="tag-cloud-link tag-link-17 tag-link-position-29"
+                  style=font-size:13.058823529412px aria-label="文章类型 (7个项目)">文章类型</a>
+                <a href="https://www.wpzhiku.com/tag/%e6%9c%8d%e5%8a%a1%e5%99%a8/" class="tag-cloud-link tag-link-66 tag-link-position-30"
+                  style=font-size:14.294117647059px aria-label="服务器 (10个项目)">服务器</a>
+                <a href="https://www.wpzhiku.com/tag/%e6%9d%83%e9%99%90/" class="tag-cloud-link tag-link-96 tag-link-position-31"
+                  style=font-size:12px aria-label="权限 (5个项目)">权限</a>
+                <a href="https://www.wpzhiku.com/tag/godeep/" class="tag-cloud-link tag-link-279 tag-link-position-32"
+                  style=font-size:13.941176470588px aria-label="深入理解 (9个项目)">深入理解</a>
+                <a href="https://www.wpzhiku.com/tag/%e7%94%a8%e6%88%b7%e4%b8%ad%e5%bf%83/" class="tag-cloud-link tag-link-128 tag-link-position-33"
+                  style=font-size:15.264705882353px aria-label="用户中心 (13个项目)">用户中心</a>
+                <a href="https://www.wpzhiku.com/tag/%e7%94%a8%e6%88%b7%e4%bd%93%e9%aa%8c/" class="tag-cloud-link tag-link-50 tag-link-position-34"
+                  style=font-size:16.764705882353px aria-label="用户体验 (20个项目)">用户体验</a>
+                <a href="https://www.wpzhiku.com/tag/%e7%94%b5%e5%ad%90%e5%95%86%e5%8a%a1/" class="tag-cloud-link tag-link-173 tag-link-position-35"
+                  style=font-size:16.588235294118px aria-label="电子商务 (19个项目)">电子商务</a>
+                <a href="https://www.wpzhiku.com/tag/%e7%ad%9b%e9%80%89/" class="tag-cloud-link tag-link-158 tag-link-position-36"
+                  style=font-size:13.058823529412px aria-label="筛选 (7个项目)">筛选</a>
+                <a href="https://www.wpzhiku.com/tag/%e7%bc%a9%e7%95%a5%e5%9b%be/" class="tag-cloud-link tag-link-18 tag-link-position-37"
+                  style=font-size:12px aria-label="缩略图 (5个项目)">缩略图</a>
+                <a href="https://www.wpzhiku.com/tag/%e7%bf%bb%e8%af%91/" class="tag-cloud-link tag-link-32 tag-link-position-38"
+                  style=font-size:12.617647058824px aria-label="翻译 (6个项目)">翻译</a>
+                <a href="https://www.wpzhiku.com/tag/%e8%87%aa%e5%ae%9a%e4%b9%89%e5%ad%97%e6%ae%b5/" class="tag-cloud-link tag-link-92 tag-link-position-39"
+                  style=font-size:15.970588235294px aria-label="自定义字段 (16个项目)">自定义字段</a>
+                <a href="https://www.wpzhiku.com/tag/%e8%a1%a8%e5%8d%95/" class="tag-cloud-link tag-link-28 tag-link-position-40"
+                  style=font-size:12.617647058824px aria-label="表单 (6个项目)">表单</a>
+                <a href="https://www.wpzhiku.com/tag/%e9%82%ae%e4%bb%b6/" class="tag-cloud-link tag-link-95 tag-link-position-41"
+                  style=font-size:12px aria-label="邮件 (5个项目)">邮件</a>
+                <a href="https://www.wpzhiku.com/tag/%e9%85%8d%e7%bd%ae/" class="tag-cloud-link tag-link-30 tag-link-position-42"
+                  style=font-size:12.617647058824px aria-label="配置 (6个项目)">配置</a>
+              </section>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+    <footer id=colophon class=site-footer>
+      <div class=container>
+        <div class="pure-g row">
+          <div class="pure-u-1 pure-u-md-1-3">
+            <div class=col>
+              <h2>关于 WordPress 智库</h2>
+              <p>WordPress 智库是文普睿思信息科技旗下，员工用于分享交流关于 WordPress 开发经验，WordPress 开发技巧，WordPress 相关经验的网站。欢迎广大 WordPress 用户前来交流经验。</p>
+            </div>
+          </div>
+          <div class="pure-u-1 pure-u-md-1-6">
+            <div class=col>
+              <h2>服务项目</h2>
+              <ul>
+                <li>
+                  <a href="https://www.wpzhiku.com/service/">WordPress 主题定制开发</a>
+                </li>
+                <li>
+                  <a href="https://www.wpzhiku.com/service/">WordPress 插件定制开发</a>
+                </li>
+                <li>
+                  <a href="https://www.wpzhiku.com/service/">WordPress 周边服务</a>
+                </li>
+                <li>
+                  <a href="https://www.wpzhiku.com/hosts/">WordPress 托管运维</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="pure-u-1 pure-u-md-1-6">
+            <div class=col>
+              <h2>关于我们</h2>
+              <ul>
+                <li>
+                  <a href="https://www.wpzhiku.com/about/">关于我们</a>
+                </li>
+                <li>
+                  <a href="https://www.wpzhiku.com/case/">服务案例</a>
+                </li>
+                <li>
+                  <a href="https://www.wpzhiku.com/service/">服务流程</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="pure-u-1 pure-u-md-1-6">
+            <div class=col>
+              <h2>经验分享</h2>
+              <ul>
+                <li>
+                  <a href="https://www.wpzhiku.com/category/skills/">主题开发</a>
+                </li>
+                <li>
+                  <a href="https://www.wpzhiku.com/category/backend/">后台开发</a>
+                </li>
+                <li>
+                  <a href="https://www.wpzhiku.com/category/themes/">主题推荐</a>
+                </li>
+                <li>
+                  <a href="https://www.wpzhiku.com/category/plugins/">插件使用</a>
+                </li>
+                <li>
+                  <a href="https://www.wpzhiku.com/category/frontend/">前端技巧</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="pure-u-1 pure-u-md-1-6">
+            <div class=col>
+              <h2>本站插件</h2>
+              <ul>
+                <li>
+                  <a href="https://www.wpzhiku.com/wizhi-multi-filters/">Wizhi Multi Filters</a>
+                </li>
+                <li>
+                  <a href="https://www.wpzhiku.com/wordpress-cms-plugin-wizhi-cms/">Wizhi CMS</a>
+                </li>
+                <li>
+                  <a href="https://www.wpzhiku.com/wizhi-optimization/">Wizhi Optimization</a>
+                </li>
+                <li>
+                  <a href="https://www.wpzhiku.com/wizhi-submenus/">Wizhi Submenus</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <div class="site-info text-center">
+      <div class=container> Copyright ©2018
+        <a class=mr5 href="https://www.wpzhiku.com">郑州文普睿思信息科技有限公司旗下-WordPress 智库</a>
+        <a rel=nofollow target=_blank href="http://www.miibeian.gov.cn/">豫ICP备13011925号-2</a>
+      </div>
+    </div>
+  </div>
+  <script src='https://static.wpcio.com/wp-content/plugins/zero-spam/zero-spam.min.js' type="text/psajs" data-pagespeed-orig-index=5></script>
+  <script src='https://static.wpcio.com/wp-content/themes/wpzhiku/front/dist/scripts/main-c78d320e0f.js' type="text/psajs"
+    data-pagespeed-orig-index=6></script>
+  <script src='https://static.wpcio.com/wp-includes/js/comment-reply.min.js' type="text/psajs" data-pagespeed-orig-index=7></script>
+  <script src='https://static.wpcio.com/wp-includes/js/wp-embed.min.js' type="text/psajs" data-pagespeed-orig-index=8></script> </body>
+
+</html>
+<script type="text/javascript" src="/pagespeed_static/js_defer.I4cHjq6EEP.js"></script>
