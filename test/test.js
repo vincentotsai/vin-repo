@@ -15,3 +15,18 @@ setTimeout(function() {
   log(vm.a)
 }, 2000);
 log('vm.a->>',vm.a)
+
+
+// vue源码解析
+const Sub = Vue.extend({
+  name: 'a',
+  components: {
+    'p': 'hi'
+  }
+
+})
+console.log(Sub.super === Vue) // true
+
+const s = new Sub()
+console.log(s.constructor === Sub) // true
+console.log(s.constructor.options)
