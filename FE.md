@@ -746,7 +746,7 @@
 
 		margin是用来隔开元素与元素的间距；padding是用来隔开元素与内容的间隔。
 		margin用于布局分开元素使元素与元素互不相干；
-		padding用于元素与内容之间的间隔，让内容（文字）与（包裹）元素之间有一段
+		padding用于元素与内容之间的间隔，让内容（文字）与（包裹）元素之间有一段距离。
 
 
 - 抽离样式模块怎么写，说出思路，有无实践经验？[阿里航旅的面试题]
@@ -878,7 +878,7 @@
 		6.函数不应该有时候有返回值，有时候没有返回值。
 		7.For循环必须使用大括号
 		8.If语句必须使用大括号
-		9.for-in循环中的变量 应该使用var关键字明确限定作用域，从而避免作用域污染。
+		9.for-in循环中的变量 应该使用var（let）关键字明确限定作用域，从而避免作用域污染。
 
 -  JavaScript原型，原型链 ? 有什么特点？
 
@@ -1377,7 +1377,7 @@
 
         3、在URL后面加上一个随机数： "fresh=" + Math.random();。
 
-        4、在URL后面加上时间戳："nowtime=" + new Date().getTime();。
+        4、在URL后面加上时间戳："nowtime=" + new Date().getTime();。
 
         5、如果是使用jQuery，直接这样就可以了 $.ajaxSetup({cache:false})。这样页面的所有ajax都会执行这条语句就是不需要保存缓存记录。
 
@@ -1426,7 +1426,7 @@
 
 	（待完善）
 
--  AMD（Modules/Asynchronous-Definition）、CMD（Common Module Definition）规范区别？
+-  AMD（Asynchronous Module Definition）、CMD（Common Module Definition）规范区别？
 
 	> AMD 规范在这里：https://github.com/amdjs/amdjs-api/wiki/AMD
 
@@ -1566,9 +1566,6 @@
 
 		*jQuery UI则是在jQuery的基础上，利用jQuery的扩展性，设计的插件。
          提供了一些常用的界面元素，诸如对话框、拖动行为、改变大小行为等等
-
-
--  JQuery的源码看过吗？能不能简单说一下它的实现原理？
 
 -  jquery 中如何将数组转化为json字符串，然后再转化回来？
 
@@ -1892,7 +1889,7 @@ jQuery中没有提供这个功能，所以你需要先编写两个jQuery的扩�
 			停止事件冒泡，IE 中阻止事件进一步冒泡，需要设置 cancelBubble 为 true，Mozzilla 中，需要调用 stopPropagation()；
 
 
-- 99%的网站都需要被重构是那本书上写的？
+- 99%的网站都需要被重构是哪本书上写的？
 
 		网站重构：应用web标准进行设计（第2版）
 
