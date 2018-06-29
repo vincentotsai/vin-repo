@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>函数柯里化curring</title>
+  <style>
+    body {
+      height: 100%;
+    }
+    #app {
+      height: 100px;
+      background: #ccc;
+      overflow-y: auto;
+
+    }
+    .scroll {
+      overflow-y: auto;
+    }
+    li {
+      list-style: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <div class="scroll" onscroll="raThrottle()">
+      <ul class="a" >
+        <li class="item">1</li>
+        <li class="item">2</li>
+        <li class="item">3</li>
+        <li class="item">4</li>
+        <li class="item">5</li>
+        <li class="item">6</li>
+        <li class="item">7</li>
+        <li class="item">8</li>
+        <li class="item">9</li>
+        <li class="item">10</li>
+      </ul>
+    </div>
+  </div>
+  <script>
+    //解决requestAnimationFrame兼容问题
+    let raFrame = window.requestAnimationFrame ||
+      window.webkitRequestAnimationFrame ||
+      window.mozRequestAnimationFrame ||
+      window.oRequestAnimationFrame ||
+      window.msRequestAnimationFrame ||
+      function (callback) {
+        window.setTimeout(callback, 1000 / 60)
+      }
+    let raThrottle = function () {
+      console.log('raThrottle..')
+    }
+
+    let tot = document.getElementsByClassName('a')[0]
+
+    tot.addEventListener('click',raThrottle)
+    window.addEventListener('scroll',raThrottle)
+  </script>
+</body>
+
+</html>
