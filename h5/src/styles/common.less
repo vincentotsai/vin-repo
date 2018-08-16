@@ -1,0 +1,127 @@
+[hidden] {
+	display: none;
+}
+
+::-webkit-scrollbar{
+	display: none;
+}
+
+*{
+	padding: 0;
+	margin: 0;
+	font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+	-webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout:none;
+}
+
+input{
+    -webkit-appearance: none;
+    outline:none;
+    border: none;
+	border-radius: 0px;
+}
+
+input[type=button],input[type=text],input[type=password]{-webkit-appearance:none;outline:none}
+
+a{
+	text-decoration: none;
+}
+iframe{
+	display: none;
+}
+/*加载动画颜色*/
+.mint-spinner-fading-circle > div:before{
+	// background-color: rgba(0,0,0,0.7)!important;
+}
+
+/*上拉加载文字大小*/
+.mint-indicator-wrapper{
+    // background-color: transparent!important;
+    height: 62px;
+    z-index: 1500;
+}
+.mint-loadmore-text{
+    font-size: 13px;
+}
+
+/*改变Toast层级*/
+.mint-toast{z-index: 99999;}
+
+/*去除cell-swipe重叠问题*/
+.mint-cell-wrapper {
+    position: relative;
+}
+.mint-cell-wrapper{
+	background: none;
+}
+
+/*Message弹框*/
+.mint-msgbox {
+    // .px2rem(width, auto);
+    width: 83%;
+    font-size: 17px;
+    .px2rem(border-radius, 24);
+    background-color: rgba(255,255,255,.9);
+}
+.mint-msgbox-content {
+	min-height: auto;
+	padding: 22px 20px;
+}
+.mint-msgbox-btn {
+	border-color: #D9D9D9;
+    background-color: transparent;
+}
+.mint-msgbox-message {
+	color: #343C45;
+	text-align: left;
+	line-height: initial;
+}
+.mint-msgbox-content {
+	border-color: #D9D9D9;
+}
+.none{
+	display: none;
+}
+.tl{
+	text-align: left;
+}
+.tc{
+	text-align: center;
+}
+.tr{
+	text-align: right;
+}
+.org{
+	color: #F85B27;
+}
+
+.view-content,.home-content,.goods-list,.goods-content,.recommend-content{
+    -webkit-overflow-scrolling: touch;
+}
+.empty{
+	display: block;
+	margin: 20% auto 0 auto;
+}
+.view{
+	position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    .px2rem(bottom, 106);
+    overflow: auto;
+}
+.clearfix:after {
+  content: ".";
+  width: 0;
+  height: 0;
+  visibility: hidden;
+  display: block;
+  clear: both;
+  overflow:hidden;
+}
+.ellipse {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
