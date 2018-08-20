@@ -1,0 +1,42 @@
+@import 'normalize.css';
+@import 'common.less';
+@import 'transition.less';
+@import 'px2rem.less';
+.loot_mask{
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0.6;
+    background: #272728;
+    font-size: 16px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .mask_img {
+        .px2rem(margin-right,16);
+        .pxrem(width,24);
+        .pxrem(height,24);
+    }
+}
+.square_mask{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    opacity: 0.6;
+    width: 48px;
+    height: 48px;
+    transform: translate(-50%,-50%);
+    background: #272728;
+    font-size: 12px;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+li{
+  margin:0;
+  padding:0;
+  list-style: none;
+}

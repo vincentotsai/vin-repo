@@ -1,0 +1,20 @@
+// 以750px设计稿为基准，第一个参数为属性名，后续参数为要设置的尺寸值
+.px2rem(@attr, @size){
+	@{attr}: @size / 75rem;
+}
+.px2rem(@attr, @size1, @size2){
+	@{attr}: @size1 / 75rem @size2 / 75rem;
+}
+.px2rem(@attr, @size1, @size2, @size3){
+	@{attr}: @size1 / 75rem @size2 / 75rem @size3 / 75rem;
+}
+.px2rem(@attr, @size1, @size2, @size3, @size4){
+	@{attr}: @size1 / 75rem @size2 / 75rem @size3 / 75rem @size4 / 75rem;
+}
+// 以375px设计稿为基准，第一个参数为属性名，后续参数为要设置的尺寸值
+.pxrem(@attr, @size){
+    @{attr}: @size / 37.5rem;
+}
+.pxrem(@attr, @size1, @size2, @size3, @size4){
+		@{attr}: @size1 / 37.5rem @size2 / 37.5rem @size3 / 37.5rem @size4 / 37.5rem;
+}

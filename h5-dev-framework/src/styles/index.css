@@ -1,0 +1,157 @@
+@import 'normalize.css';
+[hidden] {
+  display: none;
+}
+::-webkit-scrollbar {
+  display: none;
+}
+* {
+  padding: 0;
+  margin: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+input {
+  -webkit-appearance: none;
+  outline: none;
+  border: none;
+  border-radius: 0px;
+}
+input[type=button],
+input[type=text],
+input[type=password] {
+  -webkit-appearance: none;
+  outline: none;
+}
+a {
+  text-decoration: none;
+}
+iframe {
+  display: none;
+}
+/*加载动画颜色*/
+.mint-spinner-fading-circle > div:before {
+  background-color: rgba(0, 0, 0, 0.7) !important;
+}
+/*上拉加载文字大小*/
+.mint-indicator-wrapper {
+  /* background-color: transparent!important; */
+  z-index: 1500;
+}
+.mint-loadmore-text {
+  font-size: 13px;
+}
+/*改变Toast层级*/
+.mint-toast {
+  z-index: 99999;
+}
+/*去除cell-swipe重叠问题*/
+.mint-cell-wrapper {
+  position: relative;
+}
+.mint-cell-wrapper {
+  background: none;
+}
+/*Message弹框*/
+.mint-msgbox {
+  width: 83%;
+  font-size: 17px;
+  border-radius: 0.32rem;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+.mint-msgbox-content {
+  min-height: auto;
+  padding: 22px 20px;
+}
+.mint-msgbox-btn {
+  border-color: #D9D9D9;
+  background-color: transparent;
+}
+.mint-msgbox-message {
+  color: #343C45;
+  text-align: left;
+  line-height: initial;
+}
+.mint-msgbox-content {
+  border-color: #D9D9D9;
+}
+.none {
+  display: none;
+}
+.tl {
+  text-align: left;
+}
+.tc {
+  text-align: center;
+}
+.tr {
+  text-align: right;
+}
+.org {
+  color: #F85B27;
+}
+.view-content,
+.home-content,
+.goods-list,
+.goods-content,
+.recommend-content {
+  -webkit-overflow-scrolling: touch;
+}
+.empty {
+  display: block;
+  margin: 20% auto 0 auto;
+}
+.view {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 1.41333333rem;
+  overflow: auto;
+}
+.mic-dialog-transition {
+  opacity: 1;
+  transition-duration: .4s;
+  transform: translate(-50%, -50%) scale(1) !important;
+  transition-property: transform, opacity!important;
+}
+.mic-dialog-enter,
+.mic-dialog-leave {
+  opacity: 0;
+}
+.mic-dialog-enter {
+  transform: translate(-50%, -50%) scale(1.185) !important;
+}
+.mic-dialog-leave {
+  transform: translate(-50%, -50%) scale(1) !important;
+}
+@-webkit-keyframes zoomIn {
+  from {
+    opacity: 0;
+    -webkit-transform: scale3d(0.3, 0.3, 0.3);
+    transform: scale3d(0.3, 0.3, 0.3);
+  }
+  50% {
+    opacity: 1;
+  }
+}
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    -webkit-transform: scale3d(0.3, 0.3, 0.3);
+    transform: scale3d(0.3, 0.3, 0.3);
+  }
+  50% {
+    opacity: 1;
+  }
+}
+.zoomIn {
+  -webkit-animation: zoomIn 0.5s;
+  animation: zoomIn 0.5s;
+}
+li{
+  margin:0;
+  padding:0;
+  list-style: none;
+}
