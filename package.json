@@ -1,0 +1,27 @@
+{
+  "name": "vin-repo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "ajax.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^7.29.0",
+    "eslint-plugin-react": "^7.24.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vincentotsai/vin-repo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vincentotsai/vin-repo/issues"
+  },
+  "homepage": "https://github.com/vincentotsai/vin-repo#readme"
+}
